@@ -7,6 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+/*
+* Displays all data about a selected person.
+* Handles if use chooses to edit or delete this specific entry.
+*
+ */
+
 public class MoreInformationActivity extends AppCompatActivity {
 
     private PeopleList entryList;
@@ -14,13 +20,19 @@ public class MoreInformationActivity extends AppCompatActivity {
     private int index;
 
     @Override
+
+    /*
+    * Displays and formats all data of a specific person using TextViews.
+    * If a given field is set to zero, it is ignored.
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more_information);
 
         this.entryList = PeopleList.getInstance();
 
-        //http://stackoverflow.com/questions/5265913/how-to-use-putextra-and-getextra-for-string-data
+        //Taken from http://stackoverflow.com/questions/5265913/how-to-use-putextra-and-getextra-for-string-data
+        // 2017-02-04 23:00:00
         Bundle extras = getIntent().getExtras();
         this.index = extras.getInt("INDEX");
 
@@ -69,6 +81,10 @@ public class MoreInformationActivity extends AppCompatActivity {
 
     }
 
+    /*
+    * Calls the list of people to handle a deletion of a person
+    * Intents back to main activity
+     */
     public void delete(View v){
         this.entryList.deleteFromList(this.index,this);
         Intent i = new Intent(this,MainActivity.class);
@@ -76,6 +92,9 @@ public class MoreInformationActivity extends AppCompatActivity {
         finish();
     }
 
+    /*
+    * Sends index of specific person the user is viewing to the EditExistingEntryActivity
+     */
     public void moveToEditEntry(View v){
         Intent i = new Intent(this,EditExistingEntryActivity.class);
         i.putExtra("INDEX",index);

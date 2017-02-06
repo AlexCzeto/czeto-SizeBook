@@ -21,21 +21,30 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+/*
+* Main Activity
+*
+* Acts as main page of the app.
+* Handles the display of the people entries in a list format.
+* Loads list from file and updates adapter.
+* Moves to other activities based on user selection.
+ */
 public class MainActivity extends AppCompatActivity {
-
-    // Lonely Twitter
     private PeopleList entryList;
     private ListView displayedPeople;
     private ArrayAdapter<Person> adapter;
     public static final String FILENAME = "pfile.sav";
 
+
+    /*
+    * Handles the set up of the app.
+    * Makes sure the list of people is instantiated and is filled with people from file.
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
         this.entryList = PeopleList.getInstance();
         loadFromFile();
 
@@ -43,11 +52,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //From Lonely Twitter
+
+    /*
+    * Handles main activity updates.
+    * Sets up list adapter, and moves to more information activity if a list item is selected
+    * Updates count of the number of entries.
+     */
     protected void onStart() {
 
         super.onStart();
         displayedPeople = (ListView) findViewById(R.id.displayedPeople);
-
 
         adapter = new ArrayAdapter<Person>(this,
                 R.layout.person_description, entryList.getListOfPeople());
@@ -67,12 +81,14 @@ public class MainActivity extends AppCompatActivity {
         countText.setText("Number of Entries : " + Integer.toString(count));
 
 
-
-        //displayedPeople.setOnItemClickListener();
-        // TODO Auto-generated method stub
-
     }
 
+    /*
+    * Loads people from file into the people array
+    * People are stored as Gson type
+    * Loadformfile function taken from lonelyTwitter
+    *
+     */
     private void loadFromFile() {
         try {
             FileInputStream fis = openFileInput(FILENAME);
@@ -93,12 +109,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /*
+    * Intents into the AddNewEntryActivity
+     */
     public void moveAddEntry(View v){
         Intent i = new Intent(this,AddNewEntryActivity.class);
         startActivity(i);
-        finish();
+        //finish();
     }
 
+    /*
+    * Intents into the MoreInformationActivity
+    * Adds index of the person that user wants more information on from the people list as extra.
+    */
     public void moveToMoreInformation(View v,int index){
         Intent i = new Intent(this,MoreInformationActivity.class);
         i.putExtra("INDEX",index);

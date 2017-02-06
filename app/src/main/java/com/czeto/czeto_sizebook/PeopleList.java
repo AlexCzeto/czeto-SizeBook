@@ -20,7 +20,14 @@ import static com.czeto.czeto_sizebook.MainActivity.FILENAME;
  * Created by Alex on 2/3/2017.
  */
 
-// http://www.javaworld.com/article/2073352/core-java/simply-singleton.html <- Singleton
+/*
+* PeopleList
+* Global class that only ever has one instance.
+* Has an ArrayList of all user entered entries
+* Handles the management of the people ArrayList
+* Handles the saving of the list to a file.
+*
+ */
 
 public class PeopleList {
     private ArrayList<Person> listOfPeople;
@@ -29,7 +36,9 @@ public class PeopleList {
     private PeopleList() {
         this.listOfPeople = new ArrayList<Person>();
     }
-
+    // Taken from : http://www.javaworld.com/article/2073352/core-java/simply-singleton.html
+    // 2017-02-05 20:00
+    // Makes sure only one instance of PeopleList exists
     public static PeopleList getInstance(){
         if(instance == null) {
             instance = new PeopleList();
@@ -63,7 +72,7 @@ public class PeopleList {
         return this.listOfPeople.size();
     }
 
-    //lonely Twitter
+    // Taken from lonely Twitter
     public void saveInFile(Context ctx) {
         Log.d("Hello","Save Hello");
         try {
@@ -78,10 +87,8 @@ public class PeopleList {
 
             fos.close();
         } catch (FileNotFoundException e) {
-            // TODO Handle the Exception properly later
             throw new RuntimeException();
         } catch (IOException e) {
-            // TODO Handle the Exception properly later
             throw new RuntimeException();
         }
     }

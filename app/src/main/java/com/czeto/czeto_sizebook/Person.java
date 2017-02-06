@@ -6,6 +6,14 @@ import java.util.Date;
  * Created by Alex on 2/3/2017.
  */
 
+/*
+* Person
+* Represents a single person entry.
+* Holds all data about a given person.
+* Has a getter and setter for every variable.
+* Over rides toString so to format seen in the MainActivity.
+ */
+
 public class Person {
     private String name;
     private Date date;

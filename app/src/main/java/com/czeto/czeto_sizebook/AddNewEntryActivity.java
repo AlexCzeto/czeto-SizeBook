@@ -13,6 +13,10 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+/*
+* AddNewEntryActivity
+* Takes in user entered data about a person and sends it to the person constructor.
+ */
 public class AddNewEntryActivity extends AppCompatActivity {
 
     private PeopleList EntryList;
@@ -25,6 +29,17 @@ public class AddNewEntryActivity extends AppCompatActivity {
         this.EntryList = PeopleList.getInstance();
     }
 
+    /*
+    * Called when finish button is clicked.
+    * Parses each field individually. If the name field is left blank , this activity remains open
+    * and no new person is created.
+    * If any field has data that can not be parsed this activity remains open, no new person is
+    * created, and a toast error message pops up letting the user know which fields caused the
+    * error.
+    * If any of the size fields are left blank they will not be parsed and instead set to zero.
+    * If the date field is left blank it will be set to today's date.
+    * If a new entry is correctly entered , it will intent back to the main page.
+     */
     public void addNewEntry(View v){
         Log.d("Hello"," Even More Hello");
 
@@ -114,8 +129,8 @@ public class AddNewEntryActivity extends AppCompatActivity {
             }
         }
 
-        //https://www.mkyong.com/java/how-to-check-if-date-is-valid-in-java/
-
+        //Taken from https://www.mkyong.com/java/how-to-check-if-date-is-valid-in-java/
+        // 2017-02-04 22:00
         if(!dateText.getText().toString().isEmpty()) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             sdf.setLenient(false);
