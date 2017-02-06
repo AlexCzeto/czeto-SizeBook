@@ -134,7 +134,7 @@ public class EditExistingEntryActivity extends AppCompatActivity {
 
         if(!chestText.getText().toString().isEmpty()) {
             try {
-                chestCir = Double.parseDouble(bustText.getText().toString());
+                chestCir = Double.parseDouble(chestText.getText().toString());
             } catch (NumberFormatException e) {
                 String errorString = "Chest circumference entered incorrectly.";
                 Toast errorMessage = Toast.makeText(this, errorString, Toast.LENGTH_SHORT);

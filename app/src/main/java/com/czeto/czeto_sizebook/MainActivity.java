@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private PeopleList entryList;
     private ListView displayedPeople;
     private ArrayAdapter<Person> adapter;
-    public static final String FILENAME = "pfile.sav";
+    public static final String FILENAME = "PLfile.sav";
 
 
     /*
