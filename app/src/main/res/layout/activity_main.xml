@@ -14,9 +14,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ADD ENTRY"
-        android:onClick="moveToEdit"
+        android:onClick="moveAddEntry"
         android:id="@+id/button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/count"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+    <ListView
+        android:id="@+id/displayedPeople"
+        android:layout_width="fill_parent"
+        android:layout_height="263dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical"
+        android:layout_below="@+id/count"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:layout_above="@+id/button">
+
+    </ListView>
 </RelativeLayout>

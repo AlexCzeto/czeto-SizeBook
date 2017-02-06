@@ -3,9 +3,9 @@
     package="com.czeto.czeto_sizebook">
 
     <application
+        android:label="czeto-SizeBook"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
@@ -15,7 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddNewEntryActivity"></activity>
+        <activity android:name=".AddNewEntryActivity" />
+        <activity android:name=".MoreInformationActivity" />
+        <activity android:name=".EditExistingEntryActivity"></activity>
     </application>
 
 </manifest>

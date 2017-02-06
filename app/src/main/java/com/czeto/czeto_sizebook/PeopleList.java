@@ -1,9 +1,20 @@
 package com.czeto.czeto_sizebook;
 
+import android.content.Context;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.ListIterator;
+
+import static com.czeto.czeto_sizebook.MainActivity.FILENAME;
+
 
 /**
  * Created by Alex on 2/3/2017.
@@ -30,16 +41,49 @@ public class PeopleList {
         return this.listOfPeople;
     }
 
-    public void addToList(Person newFriend){
-        this.listOfPeople.add(newFriend);
+    public void setListOfPeople(ArrayList<Person> newPeopleList){
+        listOfPeople = newPeopleList;
     }
 
-    //http://stackoverflow.com/questions/18410035/ways-to-iterate-over-a-list-in-java
-    public void printPL(){
-        Person memberOfList;
-        for (ListIterator<Person> iter = this.listOfPeople.listIterator(); iter.hasNext(); ) {
-            memberOfList = iter.next();
-            Log.d("tag", memberOfList.textVersion());
+    public Person getPerson(int index){
+        return listOfPeople.get(index);
+    }
+
+    public void addToList(Person newFriend,Context ctx){
+        this.listOfPeople.add(newFriend);
+        this.saveInFile(ctx);
+    }
+
+    public void deleteFromList(int index,Context ctx){
+        this.listOfPeople.remove(index);
+        this.saveInFile(ctx);
+    }
+
+    public int returnCount(){
+        return this.listOfPeople.size();
+    }
+
+    //lonely Twitter
+    public void saveInFile(Context ctx) {
+        Log.d("Hello","Save Hello");
+        try {
+            FileOutputStream fos;
+            fos = ctx.openFileOutput(FILENAME,
+                    Context.MODE_PRIVATE);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+
+            Gson gson = new Gson();
+            gson.toJson(listOfPeople,out);
+            out.flush();
+
+            fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Handle the Exception properly later
+            throw new RuntimeException();
+        } catch (IOException e) {
+            // TODO Handle the Exception properly later
+            throw new RuntimeException();
         }
     }
+
 }

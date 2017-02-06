@@ -1,45 +1,90 @@
 package com.czeto.czeto_sizebook;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+public class EditExistingEntryActivity extends AppCompatActivity {
 
-public class AddNewEntryActivity extends AppCompatActivity {
-
-    private PeopleList EntryList;
+    private int index;
+    private PeopleList entryList;
+    private Person oldFriend;
+    private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("tag"," Even Less Hello");
-        setContentView(R.layout.activity_add_new_entry);
-        this.EntryList = PeopleList.getInstance();
-    }
-
-    public void addNewEntry(View v){
-        Log.d("Hello"," Even More Hello");
-
+        setContentView(R.layout.activity_edit_existing_entry);
         final EditText nameText = (EditText) findViewById(R.id.name);
         final EditText neckText = (EditText) findViewById(R.id.neck);
-        final EditText bustText = (EditText) findViewById(R.id.bust);
         final EditText chestText = (EditText) findViewById(R.id.chest);
-        final EditText waistText = (EditText) findViewById(R.id.waist);
         final EditText hipText = (EditText) findViewById(R.id.hip);
+        final EditText waistText = (EditText) findViewById(R.id.waist);
+        final EditText bustText = (EditText) findViewById(R.id.bust);
         final EditText inseamText = (EditText) findViewById(R.id.inseam);
         final EditText commentText = (EditText) findViewById(R.id.comment);
         final EditText dateText = (EditText) findViewById(R.id.date);
 
-        Person newFriend = null;
+        this.entryList = PeopleList.getInstance();
+        //http://stackoverflow.com/questions/5265913/how-to-use-putextra-and-getextra-for-string-data
+        Bundle extras = getIntent().getExtras();
+        this.index = extras.getInt("INDEX");
+        this.oldFriend = this.entryList.getPerson(index);
+
+        nameText.setText(this.oldFriend.getName());
+
+        sdf.setLenient(false);
+        dateText.setText(sdf.format(oldFriend.getDate()));
+
+        if (!oldFriend.getComment().isEmpty()){
+            commentText.setText(oldFriend.getComment());
+        }
+
+        if(oldFriend.getNeck() != 0){
+            neckText.setText(String.format("%1$.3f",oldFriend.getNeck()));
+        }
+
+        if(oldFriend.getBust() != 0){
+            bustText.setText(String.format("%1$.3f",oldFriend.getBust()));
+        }
+
+        if(oldFriend.getChest() != 0){
+            chestText.setText(String.format("%1$.3f",oldFriend.getChest()));
+        }
+
+        if(oldFriend.getWaist() != 0){
+            waistText.setText(String.format("%1$.3f",oldFriend.getWaist()));
+        }
+
+        if(oldFriend.getHip() != 0){
+            hipText.setText(String.format("%1$.3f",oldFriend.getHip()));
+        }
+
+        if(oldFriend.getInseam() != 0){
+            inseamText.setText(String.format("%1$.3f",oldFriend.getInseam()));
+        }
+
+    }
+
+    public void alterEntry(View v){
+        final EditText nameText = (EditText) findViewById(R.id.name);
+        final EditText neckText = (EditText) findViewById(R.id.neck);
+        final EditText chestText = (EditText) findViewById(R.id.chest);
+        final EditText hipText = (EditText) findViewById(R.id.hip);
+        final EditText waistText = (EditText) findViewById(R.id.waist);
+        final EditText bustText = (EditText) findViewById(R.id.bust);
+        final EditText inseamText = (EditText) findViewById(R.id.inseam);
+        final EditText commentText = (EditText) findViewById(R.id.comment);
+        final EditText dateText = (EditText) findViewById(R.id.date);
+
         Boolean cleanData = true;
+
         String name = nameText.getText().toString();
         String comment = commentText.getText().toString();
         Double neckCir = 0.0;
@@ -114,8 +159,7 @@ public class AddNewEntryActivity extends AppCompatActivity {
             }
         }
 
-        //https://www.mkyong.com/java/how-to-check-if-date-is-valid-in-java/
-
+//        //https://www.mkyong.com/java/how-to-check-if-date-is-valid-in-java/
         if(!dateText.getText().toString().isEmpty()) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             sdf.setLenient(false);
@@ -129,18 +173,21 @@ public class AddNewEntryActivity extends AppCompatActivity {
                 errorMessage.show();
                 cleanData = Boolean.FALSE;
             }
-
+//
         }
-
 
         if(!name.isEmpty() && cleanData == Boolean.TRUE){
-            newFriend = new Person(name,date,neckCir ,bustCir,chestCir,waistCir,hipCir,inseam,comment);
-            EntryList.addToList(newFriend,this);
-        }
+            oldFriend.setName(name);
+            oldFriend.setBust(bustCir);
+            oldFriend.setChest(chestCir);
+            oldFriend.setHip(hipCir);
+            oldFriend.setWaist(waistCir);
+            oldFriend.setInseam(inseam);
+            oldFriend.setNeck(neckCir);
+            oldFriend.setComment(comment);
+            oldFriend.setDate(date);
 
-        if(newFriend != null){
-            Intent i = new Intent(this,MainActivity.class);
-            startActivity(i);
+
             finish();
         }
     }

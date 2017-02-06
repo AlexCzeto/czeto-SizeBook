@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_add_new_entry"
+    android:id="@+id/activity_edit_existing_entry"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.czeto.czeto_sizebook.AddNewEntryActivity">
+    tools:context="com.czeto.czeto_sizebook.EditExistingEntryActivity">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="FINISHED"
-        android:onClick="addNewEntry"
-        android:id="@+id/button"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -26,36 +17,27 @@
         android:inputType="textPersonName"
         android:hint = "Name"
         android:ems="10"
+        android:id="@+id/name"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/name" />
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
+        android:hint="Neck"
         android:ems="10"
+        android:id="@+id/neck"
         android:layout_below="@+id/name"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/neck"
-        android:hint ="Neck circumference" />
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:hint ="Bust circumference"
-        android:ems="10"
-        android:id="@+id/bust"
-        android:layout_below="@+id/neck"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-    <EditText
+
+        <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
-        android:hint ="Chest circumference"
+        android:hint="Chest"
         android:ems="10"
         android:layout_below="@+id/bust"
         android:layout_alignParentLeft="true"
@@ -66,7 +48,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
-        android:hint ="Waist circumference"
+        android:hint="Hip"
+        android:ems="10"
+        android:layout_below="@+id/waist"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/hip" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:hint="Waist"
         android:ems="10"
         android:layout_below="@+id/chest"
         android:layout_alignParentLeft="true"
@@ -77,12 +70,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
-        android:hint="Hip circumference "
+        android:hint="Bust"
         android:ems="10"
-        android:layout_below="@+id/waist"
+        android:layout_below="@+id/neck"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/hip" />
+        android:id="@+id/bust" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -98,23 +91,33 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="text|date"
-        android:hint = "yyyy-MM-dd"
+        android:inputType="text"
+        android:hint="Comment"
         android:ems="10"
-        android:id="@+id/date"
-        android:layout_below="@+id/comment"
+        android:layout_below="@+id/inseam"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:id="@+id/comment" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="Comment"
+        android:inputType="text|date"
+        android:hint="yyyy-MM-dd"
         android:ems="10"
-        android:id="@+id/comment"
-        android:layout_below="@+id/inseam"
+        android:layout_below="@+id/comment"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:id="@+id/date" />
+
+    <Button
+        android:text="Finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="alterEntry"
+        android:id="@+id/button4" />
 
 </RelativeLayout>

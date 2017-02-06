@@ -18,7 +18,8 @@ public class Person {
     private String comment ;
 
 
-    public Person(String name, Double neck, Double bust, Double chest, Double waist, Double hip, Double inseam, String comment) {
+    public Person(String name, Date date,Double neck, Double bust, Double chest, Double waist, Double hip, Double inseam, String comment) {
+        this.date = date;
         this.neck = neck;
         this.name = name;
         this.bust = bust;
@@ -28,7 +29,97 @@ public class Person {
         this.inseam = inseam;
         this.comment = comment;
     }
-    public String textVersion(){
-        return ("Name : "+this.name+" Neck : "+this.neck+" Bust : "+this.bust+" Chest : "+this.chest+" Waist : "+this.waist+" Hip : "+this.hip+" Inseam : "+this.inseam+" Comment : "+comment);
+
+    public String getName() {
+        return name;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Double getInseam() {
+        return inseam;
+    }
+
+    public void setInseam(Double inseam) {
+        this.inseam = inseam;
+    }
+
+    public Double getHip() {
+        return hip;
+    }
+
+    public void setHip(Double hip) {
+        this.hip = hip;
+    }
+
+    public Double getWaist() {
+        return waist;
+    }
+
+    public void setWaist(Double waist) {
+        this.waist = waist;
+    }
+
+    public Double getChest() {
+        return chest;
+    }
+
+    public void setChest(Double chest) {
+        this.chest = chest;
+    }
+
+    public Double getBust() {
+        return bust;
+    }
+
+    public void setBust(Double bust) {
+        this.bust = bust;
+    }
+
+    public Double getNeck() {
+        return neck;
+    }
+
+    public void setNeck(Double neck) {
+        this.neck = neck;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+
+    @Override
+    public String toString(){
+        String listItem = this.name;
+        if (this.bust != 0){
+            listItem = listItem + String.format("\nBust Size : %1$.1f",this.bust);
+        }
+        if (this.chest != 0){
+            listItem = listItem + String.format("\nChest Size : %1$.1f",this.chest);
+        }
+        if (this.waist != 0){
+            listItem = listItem + String.format("\nWaist Size : %1$.1f",this.waist);
+        }
+        if (this.inseam != 0){
+            listItem = listItem + String.format("\nInseam Size : %1$.1f",this.inseam);
+        }
+
+        return listItem;
+    }
+
 }
